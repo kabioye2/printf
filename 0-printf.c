@@ -13,8 +13,8 @@ int _printf(const char *format, ...)
 	int i;
 	char c;
 	char *s;
-
 	va_list args;
+
 	va_start(args, format);
 
 	while (*format != '\0')
@@ -24,13 +24,13 @@ int _printf(const char *format, ...)
 			format++;
 			if (*format == 'c')
 			{
-				char c = va_arg(args, int);
+				c = va_arg(args, int);
 				_putchar(c);
 				i++;
 			}
 			else if (*format == 's')
 			{
-				char *s = va_arg(args, char *);
+				s = va_arg(args, char *);
 				while (*s != '\0')
 				{
 					_putchar(*s);

@@ -45,14 +45,14 @@ int _printf(const char *format, ...)
 			}
 			else
 			{
-				putchar('%');
+				_putchar('%');
 				putchar(*format);
 				i += 2;
 			}
 		}
 		else
 		{
-			putchar(*format);
+			_putchar(*format);
 			i++;
 		}
 		format++;

@@ -11,10 +11,15 @@
 int _printf(const char *format, ...)
 {
 	int i;
+	int j;
 	char c;
 	char *s;
+	int d_i;
+	int digits;
+	int temp;
 	va_list args;
 
+	digits = 0;
 	va_start(args, format);
 
 	while (*format != '\0')
@@ -36,6 +41,27 @@ int _printf(const char *format, ...)
 					_putchar(*s);
 					s++;
 					i++;
+				}
+			}
+			else if (*format == 'd' || *format == 'i')
+			{
+				d_i = va_arg(args, int);
+				if (d_i < 0)
+				{
+					_putchar('-');
+					d_i = -d_i;
+				}
+				temp = d_i;
+				while (temp != 0)
+				{
+					temp /= 10;
+					digits++;
+				}
+
+				for (j = 0; j < digits; j++)
+				{
+					_putchar('0' + (d_i % 10));
+					d_i /= 10;
 				}
 			}
 			else if (*format == '%')

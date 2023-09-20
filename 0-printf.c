@@ -5,6 +5,29 @@
 #include <limits.h>
 
 /**
+ * _printStr - produce output for strings
+ * @s: string
+ * Return: the number of characters printed
+ */
+
+int _printStr(char *s)
+{
+	int digits;
+
+	digits = 0;
+	if (s == NULL)
+	{
+		s = "(null)";
+	}
+	while (*s != '\0')
+	{
+		_putchar(*s++);
+		digits++;
+	}
+	return (digits);
+}
+
+/**
  * _printfInt - produce output for integers
  * @d_i: integer
  * Return: the number of characters printed
@@ -13,7 +36,6 @@
 int _printfInt(int d_i)
 {
 	char buffer[12];
-	int temp;
 	int digits;
 	int index;
 
@@ -38,17 +60,11 @@ int _printfInt(int d_i)
 			digits++;
 		}
 	}
-	temp = d_i;
-	while (temp != 0)
-	{
-		temp /= 10;
-		digits++;
-	}
-
 	while (d_i > 0)
 	{
 		buffer[index++] = '0' + (d_i % 10);
 		d_i /= 10;
+		digits++;
 	}
 	while (index > 0)
 	{
@@ -58,7 +74,52 @@ int _printfInt(int d_i)
 }
 
 /**
- * _printf - produces output according to a format
+ * _printfFormat - produce formatted output
+ * @format: a format character string to handle output format
+ * @args: argumenst passed
+ * Return: the number of characters printed
+ */
+
+int _printfFormat(const char *format, va_list args)
+{
+	int i;
+	char c;
+	char *s;
+	int d_i;
+
+	i = 0;
+	if (*format == 'c')
+	{
+		c = va_arg(args, int);
+		_putchar(c);
+		i++;
+	}
+	else if (*format == 's')
+	{
+		s = va_arg(args, char *);
+		i += _printStr(s);
+	}
+	else if (*format == 'd' || *format == 'i')
+	{
+		d_i = va_arg(args, int);
+		i += _printfInt(d_i);
+	}
+	else if (*format == '%')
+	{
+		_putchar(*format);
+		i++;
+	}
+	else
+	{
+		_putchar('%');
+		_putchar(*format);
+		i += 2;
+	}
+	return (i);
+}
+
+/**
+ * _printf - produces output
  * @format: a format character string that handles output format
  * Return: the number of characters printed
  */
@@ -66,9 +127,6 @@ int _printfInt(int d_i)
 int _printf(const char *format, ...)
 {
 	int i;
-	char c;
-	char *s;
-	int d_i;
 	va_list args;
 
 	i = 0;
@@ -87,42 +145,7 @@ int _printf(const char *format, ...)
 			{
 				return (-1);
 			}
-			if (*format == 'c')
-			{
-				c = va_arg(args, int);
-				_putchar(c);
-				i++;
-			}
-			else if (*format == 's')
-			{
-				s = va_arg(args, char *);
-				if (s == NULL)
-				{
-					s = "(null)";
-				}
-				while (*s != '\0')
-				{
-					_putchar(*s);
-					s++;
-					i++;
-				}
-			}
-			else if (*format == 'd' || *format == 'i')
-			{
-				d_i = va_arg(args, int);
-				i += _printfInt(d_i);
-			}
-			else if (*format == '%')
-			{
-				_putchar(*format);
-				i++;
-			}
-			else
-			{
-				_putchar('%');
-				_putchar(*format);
-				i += 2;
-			}
+			i += _printfFormat(format, args);
 		}
 		else
 		{

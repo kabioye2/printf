@@ -49,9 +49,9 @@ int _printfInt(int d_i)
 	if (d_i < 0)
 	{
 		_putchar('-');
-		if (d_i == INT_MIN)
+		if (d_i == INT_MIN || d_i == LONG_MIN)
 		{
-			buffer[index++] = d_i % 10;
+			buffer[index++] = '8';
 			d_i = -(d_i / 10);
 		}
 		else

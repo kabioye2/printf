@@ -83,6 +83,10 @@ int _printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
+			if (*format == '\0')
+			{
+				return (0);
+			}
 			if (*format == 'c')
 			{
 				c = va_arg(args, int);
@@ -112,10 +116,6 @@ int _printf(const char *format, ...)
 			{
 				_putchar(*format);
 				i++;
-			}
-			else if (*format == '\0')
-			{
-				return (0);
 			}
 			else
 			{

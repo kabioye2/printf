@@ -23,6 +23,7 @@ int _printfInt(int d_i)
 	{
 		_putchar('-');
 		d_i = -d_i;
+		digits++;
 	}
 	temp = d_i;
 	while (temp != 0)
@@ -40,7 +41,6 @@ int _printfInt(int d_i)
 	{
 		_putchar(buffer[--index]);
 	}
-	digits += 1;
 	return (digits);
 }
 

@@ -23,7 +23,6 @@ int _printfInt(int d_i)
 	{
 		_putchar('-');
 		d_i = -d_i;
-		i++;
 	}
 	temp = d_i;
 	while (temp != 0)
@@ -41,6 +40,7 @@ int _printfInt(int d_i)
 	{
 		_putchar(buffer[--index]);
 	}
+	digits += 1;
 	return (digits);
 }
 
@@ -60,13 +60,14 @@ int _printf(const char *format, ...)
 
 	i = 0;
 	va_start(args, format);
+	
+	if (format == NULL)
+	{
+		return (0);
+	}
 
 	while (*format != '\0')
 	{
-		if (format == NULL)
-		{
-			return (0);
-		}
 		if (*format == '%')
 		{
 			format++;

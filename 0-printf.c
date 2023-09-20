@@ -50,9 +50,15 @@ int _printfInt(int d_i)
 	{
 		_putchar('-');
 		d_i = -d_i;
-		buffer[index++] = '0' + (d_i % 10);
-		d_i = d_i / 10;
-		digits++;
+		if (d_i == INT_MIN)
+		{
+			buffer[index++] = '0' + (d_i % 10);
+			d_i = d_i / 10;
+			digits += 2;
+		}else
+		{
+			digits++;
+		}
 	}
 	while (d_i > 0)
 	{

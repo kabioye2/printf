@@ -50,6 +50,8 @@ int _printfInt(int d_i)
 	{
 		_putchar('-');
 		d_i = -d_i;
+		buffer[index++] = '0' + (d_i % 10);
+		d_i = d_i / 10;
 		digits++;
 	}
 	while (d_i > 0)

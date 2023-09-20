@@ -61,13 +61,12 @@ int _printf(const char *format, ...)
 	i = 0;
 	va_start(args, format);
 
-	if (format == NULL)
-	{
-		return (0);
-	}
-
 	while (*format != '\0')
 	{
+		if (format == NULL)
+		{
+			return (0);
+		}
 		if (*format == '%')
 		{
 			format++;

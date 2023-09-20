@@ -1,6 +1,7 @@
 #include "main.h"
 #include <stdio.h>
 #include <stdarg.h>
+#include <stddef.h>
 
 /**
  * _printfInt - produce output for integers
@@ -73,6 +74,10 @@ int _printf(const char *format, ...)
 			else if (*format == 's')
 			{
 				s = va_arg(args, char *);
+				if (s == NULL)
+				{
+					s = "(null)";
+				}
 				while (*s != '\0')
 				{
 					_putchar(*s);

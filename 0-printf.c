@@ -23,6 +23,7 @@ int _printfInt(int d_i)
 	{
 		_putchar('-');
 		d_i = -d_i;
+		i++;
 	}
 	temp = d_i;
 	while (temp != 0)
@@ -60,6 +61,11 @@ int _printf(const char *format, ...)
 	i = 0;
 	va_start(args, format);
 
+	if (format == NULL)
+	{
+		return (0);
+	}
+
 	while (*format != '\0')
 	{
 		if (*format == '%')
@@ -74,10 +80,6 @@ int _printf(const char *format, ...)
 			else if (*format == 's')
 			{
 				s = va_arg(args, char *);
-				if (s == NULL)
-				{
-					s = "(null)";
-				}
 				while (*s != '\0')
 				{
 					_putchar(*s);

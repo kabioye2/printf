@@ -71,13 +71,12 @@ int _printf(const char *format, ...)
 	int d_i;
 	va_list args;
 
-	i = 0;
-	va_start(args, format);
-	
+	i = 0;	
 	if (format == NULL)
 	{
 		return (0);
 	}
+	va_start(args, format);
 	if (format[1] == '\0')
 	{
 		_putchar(format[0]);
@@ -98,6 +97,10 @@ int _printf(const char *format, ...)
 			else if (*format == 's')
 			{
 				s = va_arg(args, char *);
+				if (s == NULL)
+				{
+					s = "(null)";
+				}
 				while (*s != '\0')
 				{
 					_putchar(*s);

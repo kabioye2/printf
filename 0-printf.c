@@ -71,16 +71,11 @@ int _printf(const char *format, ...)
 	int d_i;
 	va_list args;
 
-	i = 0;	
+	i = 0;
+	va_start(args, format);
 	if (format == NULL)
 	{
 		return (0);
-	}
-	va_start(args, format);
-	if (format[1] == '\0')
-	{
-		_putchar(format[0]);
-		return (1);
 	}
 
 	while (*format != '\0')
@@ -117,6 +112,10 @@ int _printf(const char *format, ...)
 			{
 				_putchar(*format);
 				i++;
+			}
+			else if (*format == '\0')
+			{
+				return (0);
 			}
 			else
 			{

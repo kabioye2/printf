@@ -24,11 +24,19 @@ int _printfInt(int d_i)
 		_putchar('0');
 		return (1);
 	}
-	if (d_i < 0 || d_i == INT_MIN)
+	if (d_i < 0)
 	{
 		_putchar('-');
-		d_i = -d_i;
-		digits++;
+		if (d_i == INT_MIN)
+		{
+			buffer[index++] = d_i % 10;
+			d_i = -(d_i / 10);
+		}
+		else
+		{
+			d_i = -d_i;
+			digits++;
+		}
 	}
 	temp = d_i;
 	while (temp != 0)
@@ -69,6 +77,11 @@ int _printf(const char *format, ...)
 	if (format == NULL)
 	{
 		return (0);
+	}
+	if (format[1] == '\0')
+	{
+		_putchar(format[0]);
+		return (1);
 	}
 
 	while (*format != '\0')

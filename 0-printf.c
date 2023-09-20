@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <stddef.h>
+#include <limits.h>
 
 /**
  * _printfInt - produce output for integers
@@ -18,8 +19,12 @@ int _printfInt(int d_i)
 
 	digits = 0;
 	index = 0;
-
-	if (d_i < 0)
+	if (d_i == 0)
+	{
+		_putchar('0');
+		return (1);
+	}
+	if (d_i < 0 || d_i == INT_MIN)
 	{
 		_putchar('-');
 		d_i = -d_i;

@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <stddef.h>
-#include <limits.h>
+#include <stdlib.h>
 
 /**
  * _printStr - produce output for strings
@@ -35,12 +35,14 @@ int _printStr(char *s)
 
 int _printfInt(int d_i)
 {
-	char buffer[12];
+	char *buffer;
+	int temp;
 	int digits;
 	int index;
 
 	digits = 0;
 	index = 0;
+
 	if (d_i == 0)
 	{
 		_putchar('0');
@@ -49,27 +51,32 @@ int _printfInt(int d_i)
 	if (d_i < 0)
 	{
 		_putchar('-');
-		d_i = -d_i;
-		if (d_i == INT_MIN)
-		{
-			buffer[index++] = '0' + (d_i % 10);
-			d_i = d_i / 10;
-			digits += 2;
-		}else
-		{
-			digits++;
-		}
+		d_i *= -1;
+		digits++;
+	}
+	temp = d_i;
+	while (temp != 0)
+	{
+		temp /= 10;
+		digits++;
+	}
+	buffer = malloc(sizeof(char) * (digits + 1));
+	 if (buffer == NULL)
+	{
+		return (0);
 	}
 	while (d_i > 0)
 	{
 		buffer[index++] = '0' + (d_i % 10);
 		d_i /= 10;
-		digits++;
 	}
-	while (index > 0)
+	buffer[index] = '\0';
+	while (index >= 0)
 	{
-		_putchar(buffer[--index]);
+		_putchar(buffer[index]);
+		index--;
 	}
+	free(buffer);
 	return (digits);
 }
 

@@ -11,9 +11,15 @@ int main(void)
 {
 	int len;
 	int len2;
+	int len3;
+	int len4;
+	int len5;
+	int len6;
+	long int l;
 	/*unsigned int ui;
 	void *addr;*/
-
+	
+	l = INT_MIN;
 	len = _printf("Let's try to printf a simple sentence.\n");
 	len2 = printf("Let's try to printf a simple sentence.\n");
 	/*ui = (unsigned int)INT_MAX + 1024;
@@ -42,7 +48,25 @@ int main(void)
 	printf("Unknown:[%r]\n");
 	_printf("%\n");
 	printf("%\n");
+	_printf("Hi my name is %s. Nice to meet you!\n");
+	printf("Hi my name is %s. Nice to meet you!\n");
 	_printf(NULL);
 	printf(NULL);
+	len3 = _printf("%d\n", INT_MIN);
+	len4 = printf("%d\n", INT_MIN);
+	if (len3 != len4)
+	{
+		printf("Lengths differ.\n");
+		fflush(stdout);
+	}
+	l -= 1024;
+	len5 = _printf("%d\n", l);
+	len6 = printf("%d\n", l);
+	fflush(stdout);
+	if (len5 != len6)
+	{
+		printf("Lengths differ.\n");
+		fflush(stdout);
+	}
 	return (0);
 }

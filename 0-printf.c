@@ -60,17 +60,16 @@ int _printfInt(int d_i)
 		temp /= 10;
 		digits++;
 	}
-	buffer = malloc(sizeof(char) * (digits + 1));
-	 if (buffer == NULL)
-	{
-		return (0);
-	}
+        buffer = malloc(sizeof(char) * digits);
+        if (buffer == NULL)
+        {
+                return (0);
+        }
 	while (d_i > 0)
 	{
 		buffer[index++] = '0' + (d_i % 10);
 		d_i /= 10;
 	}
-	buffer[index] = '\0';
 	while (index >= 0)
 	{
 		_putchar(buffer[index]);

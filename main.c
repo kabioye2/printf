@@ -48,8 +48,8 @@ int main(void)
 	printf("Unknown:[%r]\n");
 	_printf("%\n");
 	printf("%\n");
-	_printf("Hi my name is %s. Nice to meet you!\n");
-	printf("Hi my name is %s. Nice to meet you!\n");
+	_printf("Hi my name is %s. Nice to meet you!\n", (char *)0);
+	printf("Hi my name is %s. Nice to meet you!\n", (char *)0);
 	_printf(NULL);
 	printf(NULL);
 	len3 = _printf("%d\n", INT_MIN);

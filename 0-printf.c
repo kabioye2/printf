@@ -36,23 +36,23 @@ int _printStr(char *s)
 
 int _printfInt(int d_i)
 {
-	char buffer[12];
+	char *buffer;
 	int temp;
 	int digits;
 	int index;
 
 	digits = 0;
 	index = 0;
-
+	buffer = NULL;
 	if (d_i == 0)
 	{
 		_putchar('0');
 		return (1);
 	}
-	if (d_i < 0 || d_i == INT_MIN)
+	if (d_i < 0)
 	{
 		_putchar('-');
-		d_i *= -1;
+		d_i = -d_i;
 		digits++;
 	}
 	temp = d_i;
@@ -61,16 +61,22 @@ int _printfInt(int d_i)
 		temp /= 10;
 		digits++;
 	}
+	buffer = malloc(sizeof(char) * (digits + 1));
+	if (buffer == NULL)
+	{
+		return (0);
+	}
 	while (d_i > 0)
 	{
 		buffer[index++] = '0' + (d_i % 10);
 		d_i /= 10;
 	}
-	while (index >= 0)
+	buffer[index] = '\0';
+	while (index > 0)
 	{
-		_putchar(buffer[index]);
-		index--;
+		_putchar(buffer[--index]);
 	}
+	free(buffer);
 	return (digits);
 }
 

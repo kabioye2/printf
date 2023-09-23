@@ -6,6 +6,40 @@
 #include <stdlib.h>
 
 /**
+ * _printfBinary - produce output in binary format
+ * @u: unsigned integer
+ * Return: the number of characters printed
+ */
+
+int _printfBinary(unsigned int u)
+{
+	int binary[32];
+	int i;
+	int j;
+
+	i = 0;
+	if (u == 0)
+	{
+		_putchar('0');
+		i++;
+	}
+	else
+	{
+		while (u > 0)
+		{
+			binary[i++] = u % 2;
+			u /= 2;
+		}
+		for (j = i - 1; j >= 0; j--)
+		{
+			_putchar('0' + binary[j]);
+		}
+	}
+	return (i);
+}
+
+
+/**
  * _printStr - produce output for strings
  * @s: string
  * Return: the number of characters printed
@@ -88,6 +122,7 @@ int _printfFormat(const char *format, va_list args)
 	char c;
 	char *s;
 	int d_i;
+	unsigned int b;
 
 	i = 0;
 	if (*format == 'c')
@@ -105,6 +140,11 @@ int _printfFormat(const char *format, va_list args)
 	{
 		d_i = va_arg(args, int);
 		i += _printfInt(d_i);
+	}
+	else if (*format == 'b')
+	{
+		b = va_arg(args, unsigned int);
+		i += _printfBinary(b);
 	}
 	else if (*format == '%')
 	{

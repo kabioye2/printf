@@ -36,7 +36,7 @@ int _printStr(char *s)
 
 int _printfInt(int d_i)
 {
-	char buffer[12];
+	char buffer[1024];
 	int digits;
 	int index;
 	int lastDigit;

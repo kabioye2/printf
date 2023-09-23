@@ -43,7 +43,7 @@ int _printfInt(int d_i)
 
 	digits = 0;
 	index = 0;
-	if (d_i < 0)
+	if (d_i == INT_MIN)
 	{
 		_putchar('-');
 		lastDigit = -(d_i % 10);
@@ -55,6 +55,12 @@ int _printfInt(int d_i)
 	{
 		_putchar('0');
 		return (1);
+	}
+	if (d_i < 0)
+	{
+		_putchar('-');
+		d_i = -d_i;
+		digits++;
 	}
 	while (d_i != 0)
 	{
